@@ -1,56 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-  <!-- 
-      This is an HTML comment
-      You can write text in a comment and the content won't be visible in the page
-    -->
+  <meta charset="UTF-8">
+  <title>MOVIMENTÔMETRO</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #00ff99;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="https://glitch.com/favicon.ico" />
+    h1 {
+      font-size: 4em;
+      margin-bottom: 0.2em;
+      text-shadow: 0 0 10px #00ff99;
+    }
 
-  <!--
-      This is the page head - it contains info the browser uses
-      Like the title, which appears on the browser tab but not inside the page
-      Further down you'll see the content that displays in the page
-    -->
-  <title>Hello World!</title>
-
-  <!-- The website stylesheet -->
-  <link rel="stylesheet" href="/style.css" />
-
-  <!-- The website JavaScript file -->
-  <script src="/script.js" defer></script>
+    #counter {
+      font-size: 6em;
+      font-weight: bold;
+      text-shadow: 0 0 20px #00ff99;
+    }
+  </style>
 </head>
-
 <body>
-  <!--
-      The body includes the content you see in the page
-      Each element is defined using tags, like this <div></div>
-      The attributes like class="wrapper" let us style elements in the CSS
-    -->
-  <div class="wrapper">
-    <div class="content" role="main">
-      <h1 class="title">Oh hi website!</h1>
-      <img src="/cool-website.svg" class="illustration" alt="cool website" />
-      <div class="instructions">
-        <p>
-          Fork <a href="https://github.com/glitchdotcom/website-to-compute">this project</a> and open it in a GitHub Codespace.
-        </p>
-        <p> Follow the steps in the README to deploy your new website to Fastly in a few steps!
-        </p>
+  <h1>MOVIMENTÔMETRO</h1>
+  <div id="counter">Carregando...</div>
 
-      </div>
+  <script>
+    const startDate = new Date("2024-07-17T00:00:00Z"); // Data fixa em UTC
+    const baseValue = 899000;
+    const ratePerSecond = 0.057;
+    const counterEl = document.getElementById("counter");
 
-      <footer class="footer">
-        <div>
-          <a class="remix" href="https://github.com/glitchdotcom/website-to-compute">🚧 Get your own site</a>
-        </div>
-      </footer>
-    </div>
-  </div>
+    function updateCounter() {
+      const now = new Date();
+      const secondsElapsed = (now - startDate) / 1000;
+      const value = baseValue + secondsElapsed * ratePerSecond;
+      counterEl.textContent = value.toLocaleString("pt-BR", {
+        minimumFractionDigits: 3,
+        maximumFractionDigits: 3
+      });
+    }
+
+    setInterval(updateCounter, 100);
+    updateCounter();
+  </script>
 </body>
-
 </html>
